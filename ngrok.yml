@@ -1,0 +1,29 @@
+# ~/.config/ngrok/ngrok.yml
+#
+# Run both tunnels with one command:
+#   ngrok start --all --config ~/.config/ngrok/ngrok.yml
+#
+# Requirements:
+#   - WebSocket tunnel (http): ngrok free plan ✅
+#   - Raw TCP tunnel   (tcp):  ngrok paid plan required ⚠️
+#
+# After tunnels are up, update Flutter constants:
+#   SocketConstants.wsServerUrl   = 'wss://<your-id>.ngrok-free.app'
+#   SocketConstants.tcpServerHost = '0.tcp.ngrok.io'
+#   SocketConstants.tcpServerPort = <assigned port shown in ngrok dashboard>
+
+version: "2"
+authtoken: YOUR_NGROK_AUTHTOKEN_HERE
+
+tunnels:
+  websocket:
+    addr:  8080
+    proto: http
+    # Flutter URL: wss://<subdomain>.ngrok-free.app
+    # (ngrok auto-upgrades http→https, ws→wss)
+
+  rawsocket:
+    addr:  9000
+    proto: tcp
+    # Flutter host: 0.tcp.ngrok.io (or region-specific)
+    # Flutter port: check ngrok dashboard / tunnel inspect output
